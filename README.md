@@ -29,7 +29,7 @@ const url = "mongodb://localhost:27017";
 this will be your mongo db url
 
 at line 6
-```
+```js
 const db1 = 'Game';
 const db2 = 'MDT';
 const db3 = 'Permissions';
