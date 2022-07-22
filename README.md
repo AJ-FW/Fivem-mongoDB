@@ -7,7 +7,8 @@ for help contact here https://discord.gg/hFrfhxJAkj
 
 Step 1: Download Resource
 Step 2: Rename it to mongoDB
-Step 3: Start in server.cfg
+Step 3: Run npm i inside resource folder
+Step 4: Start in server.cfg
 
 ## How to use mongoDB
 
