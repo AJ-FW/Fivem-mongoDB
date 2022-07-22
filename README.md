@@ -63,7 +63,7 @@ function checkDatabaseReady(dbname)
 function getParamsCollection(dbname, params)
 ```
 
-#export usage
+# export usage
 
 ```lua
 MongoDB.Insert('Database name',{
