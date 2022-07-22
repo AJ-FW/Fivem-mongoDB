@@ -2,6 +2,8 @@
 
 ## This resource is created by 9dgamer#4348
 
+for help contact here https://discord.gg/hFrfhxJAkj
+
 
 Step 1: Download Resource
 Step 2: Rename it to mongoDB
