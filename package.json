@@ -1,0 +1,9 @@
+{
+    "name": "mongodb-wrapper",
+    "version": "1.0.0",
+    "main": "cluster.js",
+    "license": "MIT",
+    "dependencies": {
+        "mongodb": "^3.6.3"
+    }
+}
