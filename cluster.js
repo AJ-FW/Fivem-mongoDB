@@ -1,101 +1,38 @@
 const mongodb = require("mongodb");
 const utils = require("./utils");
+const Config = require("./Config.json")
 
-const url = "mongodb://localhost:27017";
-
-const db1 = 'Game';
-const db2 = 'MDT';
-const db3 = 'Permissions';
-const db4 = 'Players';
-const db5 = 'Storage';
-
-let database1;
-let database2;
-let database3;
-let database4;
-let database5;
+let dbs = {}
 
 let MongoDB = {}
 
-mongodb.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
+mongodb.MongoClient.connect(Config["MongoDB-URL"], { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
 
     if (err) return console.log("[MongoDB][ERROR] Failed to connect: " + err.message);
-    
-    database1 = client.db(db1);
-    database2 = client.db(db2);
-    database3 = client.db(db3);
-    database4 = client.db(db4);
-    database5 = client.db(db5);
 
-    console.log(`[MongoDB] Connected to database "${db1+" "+db2+" "+db3+" "+db4+" "+db5}".`);
+    Config.Database.forEach(value =>{
 
-    emit("onDatabaseConnect", db1,db2,db3,db4,db5);
+        dbs[value] = client.db(value)
+
+        console.log(`[MongoDB] Connected to database "${value}".`);
+
+        emit("onDatabaseConnect", value);
+
+    })
 
 });
 
 function checkDatabaseReady(dbname) {
 
-    if (dbname == 'Game') {
+    if (!dbs[dbname]) {
 
-        if (!database1) {
+        console.log(`[MongoDB][ERROR] ${dbname} Database is not connected.`);
 
-            console.log(`[MongoDB][ERROR] Game Database is not connected.`);
+        return false;
 
-            return false;
+    }
 
-        }
-
-        return true;
-
-    } else if (dbname == 'MDT') {
-
-        if (!database2) {
-
-            console.log(`[MongoDB][ERROR] MDT Database is not connected.`);
-
-            return false;
-
-        }
-
-        return true;
-
-    } else if (dbname == 'Permissions') {
-
-        if (!database3) {
-
-            console.log(`[MongoDB][ERROR] Permissions Database is not connected.`);
-
-            return false;
-
-        }
-
-        return true;
-
-    } else if (dbname == 'Players') {
-
-        if (!database4) {
-
-            console.log(`[MongoDB][ERROR] Players Database is not connected.`);
-
-            return false;
-
-        }
-
-        return true;
-
-    } else if (dbname == 'Storage') {
-
-        if (!database5) {
-
-            console.log(`[MongoDB][ERROR] Storage Database is not connected.`);
-
-            return false;
-            
-        }
-
-        return true;
-
-    } 
+    return true;
 
 };
 
@@ -109,27 +46,7 @@ function getParamsCollection(dbname, params) {
 
     if (!params.collection) return;
 
-    if (dbname == 'Game') {
-
-        return database1.collection(params.collection)
-
-    } else if (dbname == 'MDT') {
-
-        return database2.collection(params.collection)
-
-    } else if (dbname == 'Permissions') {
-
-        return database3.collection(params.collection)
-
-    } else if (dbname == 'Players') {
-
-        return database4.collection(params.collection)
-
-    } else if (dbname == 'Storage') {
-
-        return database5.collection(params.collection)
-
-    }
+    return dbs[dbname].collection(params.collection)
 
 };
 

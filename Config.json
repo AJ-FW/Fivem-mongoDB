@@ -1,0 +1,7 @@
+{
+    "MongoDB-URL": "mongodb://localhost:27017",
+    "Database": [
+        "Game",
+        "Player"
+    ]
+}

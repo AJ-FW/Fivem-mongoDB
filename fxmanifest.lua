@@ -3,7 +3,7 @@ game 'gta5'
 
 author '9dgamer'
 description 'A MongoDB wrapper for use in FiveM'
-version '1.0.0'
+version '1.0.1'
 
 server_only 'yes'
 
