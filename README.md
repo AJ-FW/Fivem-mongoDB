@@ -85,6 +85,8 @@ MongoDB.Insert('Database name',{
         return
     end
     print(count, array)
+    count -- will contain inserted Count
+    array[0] -- will contain unique object id in json
 end)
 ```
 
@@ -95,6 +97,9 @@ local result = MongoDB.Async.Insert('Database name',{
         key = 'value'
     }
 })
+result.ops[0] -- will contain inserted Data in JSON
+result.insertedCount -- will contain inserted Count
+result.insertedIds[0] -- will contain unique object id in json
 ```
 
 

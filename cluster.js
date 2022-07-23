@@ -52,19 +52,18 @@ function getParamsCollection(dbname, params) {
 
 function CheckCorrectDatabase(dbname) {
 
-    let retval = false
 
     Config.Database.forEach(value => {
-
+        console.log(value, dbname)
         if (value == dbname) {
 
-            retval = true
+            return true
 
         }
         
     });
 
-    return retval
+    return false
 
 }
 
@@ -89,8 +88,6 @@ const insertfun = function(dbname, params, callback) {
         }
 
         let documents = params.documents;
-
-        console.log(Array.isArray(documents))
 
         if (!documents || !Array.isArray(documents))
 
@@ -161,15 +158,13 @@ const insertfunawait = async (dbname, params) => {
 
         let documents = params.documents;
 
-        console.log(Array.isArray(documents))
-
         if (!documents || !Array.isArray(documents))
 
             return console.log(`[MongoDB][ERROR] exports.insert: Invalid 'params.documents' value. Expected object or array of objects.`);
 
         const options = utils.safeObjectArgument(params.options);
 
-        return await collection.insertMany(documents, options);
+        return validateDocuments (await collection.insertMany(documents, options));
 
     } else {
 
