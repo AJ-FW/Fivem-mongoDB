@@ -50,9 +50,27 @@ function getParamsCollection(dbname, params) {
 
 };
 
+function CheckCorrectDatabase(dbname) {
+
+    let retval = false
+
+    Config.Database.forEach(value => {
+
+        if (value == dbname) {
+
+            retval = true
+
+        }
+        
+    });
+
+    return retval
+
+}
+
 const insertfun = function(dbname, params, callback) {
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -113,7 +131,7 @@ const insertfun = function(dbname, params, callback) {
 
     } else {
 
-        console.log('wrong database')
+        console.log(`${dbname} database not found in config.`)
         
         return false;
 
@@ -123,7 +141,7 @@ const insertfun = function(dbname, params, callback) {
 
 const insertfunawait = async (dbname, params) => {
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
         
         if (!checkDatabaseReady(dbname)) return;
 
@@ -155,7 +173,7 @@ const insertfunawait = async (dbname, params) => {
 
     } else {
 
-        console.log('wrong database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
@@ -165,7 +183,7 @@ const insertfunawait = async (dbname, params) => {
 
 const findfun = function(dbname,params, callback) {
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -203,7 +221,7 @@ const findfun = function(dbname,params, callback) {
 
     } else {
 
-        console.log('wrong database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
@@ -212,7 +230,7 @@ const findfun = function(dbname,params, callback) {
 
 const findfunawait = async(dbname,params) =>{
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -236,7 +254,7 @@ const findfunawait = async(dbname,params) =>{
 
     } else {
 
-        console.log('wrong database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
@@ -246,7 +264,7 @@ const findfunawait = async(dbname,params) =>{
 
 const findsinglefun = function(dbname,params, callback) {
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -284,7 +302,7 @@ const findsinglefun = function(dbname,params, callback) {
 
     } else {
 
-        console.log('wrong database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
@@ -293,7 +311,7 @@ const findsinglefun = function(dbname,params, callback) {
 
 const findsinglefunawait = async(dbname,params) =>{
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -311,7 +329,7 @@ const findsinglefunawait = async(dbname,params) =>{
 
     } else {
 
-        console.log('wrong database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
@@ -321,7 +339,7 @@ const findsinglefunawait = async(dbname,params) =>{
 
 const updatefun = function(dbname, params, callback, isUpdateOne) {
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -359,7 +377,7 @@ const updatefun = function(dbname, params, callback, isUpdateOne) {
 
     } else {
 
-        console.log('wrong database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
@@ -369,7 +387,7 @@ const updatefun = function(dbname, params, callback, isUpdateOne) {
 
 const updatefunawait = async (dbname, params, isUpdateOne)=> {
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -397,7 +415,7 @@ const updatefunawait = async (dbname, params, isUpdateOne)=> {
 
     } else {
 
-        console.log('wrong database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
@@ -407,7 +425,7 @@ const updatefunawait = async (dbname, params, isUpdateOne)=> {
 
 const countfun = function(dbname, params, callback) {
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -441,7 +459,7 @@ const countfun = function(dbname, params, callback) {
 
     } else {
 
-        console.log('wrong database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
@@ -451,7 +469,7 @@ const countfun = function(dbname, params, callback) {
 
 const countfunawait = async(dbname, params)=>  {
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -469,7 +487,7 @@ const countfunawait = async(dbname, params)=>  {
 
     } else {
 
-        console.log('wrong database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
@@ -479,7 +497,7 @@ const countfunawait = async(dbname, params)=>  {
 
 const deletefun = function(dbname, params, callback, isDeleteOne) {
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -515,7 +533,7 @@ const deletefun = function(dbname, params, callback, isDeleteOne) {
 
     } else {
 
-        console.log('wrong database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
@@ -525,7 +543,7 @@ const deletefun = function(dbname, params, callback, isDeleteOne) {
 
 const deletefunawait = async(dbname, params, isDeleteOne) =>  {
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -551,7 +569,7 @@ const deletefunawait = async(dbname, params, isDeleteOne) =>  {
 
     } else {
 
-        console.log('wrong database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
@@ -561,7 +579,7 @@ const deletefunawait = async(dbname, params, isDeleteOne) =>  {
 
 const findandupdatefun = async (dbname, params, callback, isUpdateOne) => {
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -644,7 +662,7 @@ const findandupdatefun = async (dbname, params, callback, isUpdateOne) => {
 
     } else {
 
-        console.log('Wrong Database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
@@ -654,7 +672,7 @@ const findandupdatefun = async (dbname, params, callback, isUpdateOne) => {
 
 const findandupdatefunawait = async(dbname, params, isUpdateOne) => {
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -718,7 +736,7 @@ const findandupdatefunawait = async(dbname, params, isUpdateOne) => {
         
     } else {
 
-        console.log('Wrong Database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
@@ -727,7 +745,7 @@ const findandupdatefunawait = async(dbname, params, isUpdateOne) => {
 
 const findandinsert = async (dbname, params, callback) => {
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -813,7 +831,7 @@ const findandinsert = async (dbname, params, callback) => {
 
     } else {
 
-        console.log('Wrong Database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
@@ -823,7 +841,7 @@ const findandinsert = async (dbname, params, callback) => {
 
 const findandinsertawait = async (dbname, params) => {
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -879,7 +897,7 @@ const findandinsertawait = async (dbname, params) => {
 
     } else {
 
-        console.log('Wrong Database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
@@ -889,7 +907,7 @@ const findandinsertawait = async (dbname, params) => {
 
 const findinsertupdate = async(dbname, params, callback) => {
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -990,7 +1008,7 @@ const findinsertupdate = async(dbname, params, callback) => {
 
     } else {
 
-        console.log('Wrong Database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
@@ -1000,7 +1018,7 @@ const findinsertupdate = async(dbname, params, callback) => {
 
 const findinsertupdateawait = async(dbname, params) => {
 
-    if (dbname == 'Game' || dbname == 'MDT' || dbname == 'Permissions' || dbname == 'Players' || dbname == 'Storage') {
+    if (!CheckCorrectDatabase(dbname)) {
 
         if (!checkDatabaseReady(dbname)) return;
 
@@ -1055,7 +1073,7 @@ const findinsertupdateawait = async(dbname, params) => {
 
     } else {
 
-        console.log('Wrong Database')
+        console.log(`${dbname} database not found in config.`)
 
         return false;
 
