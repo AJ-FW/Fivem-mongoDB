@@ -638,7 +638,7 @@ const findandupdatefun = async (dbname, params, callback, isUpdateOne) => {
 
             if (isUpdateOne) {
 
-                collection.updateOne({_id:afterData}, update, options, cb)
+                collection.updateOne(query, update, options, cb)
 
             } else {
                 
@@ -948,7 +948,7 @@ const findinsertupdate = async(dbname, params, callback) => {
     
             }
 
-            collection.updateOne({_id:afterData}, update, options, cb)
+            collection.updateOne(query, update, options, cb)
 
         } else {
             
