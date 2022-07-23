@@ -1076,6 +1076,76 @@ const findinsertupdateawait = async(dbname, params) => {
 
 }
 
+const aggregatefun = function(dbname, params, callback) {
+
+    if (!CheckCorrectDatabase(dbname)) {
+
+        if (!checkDatabaseReady(dbname)) return;
+
+        if (!checkParams(params)) return console.log(`[MongoDB][ERROR] exports.count: Invalid params object.`);
+
+        let collection = getParamsCollection(dbname, params);
+
+        if (!collection) return console.log(`[MongoDB][ERROR] exports.insert: Invalid collection "${params.collection}"`);
+
+        const query = utils.safeObjectArgument(params.query);
+
+        let cursor = collection.aggregate([query])
+
+        cursor.toArray((err, documents) =>{
+
+            if (err) {
+
+                console.log(`[MongoDB][ERROR] exports.find: Error "${err.message}".`);
+
+                utils.safeCallback(callback, false, err.message);
+
+                return;
+
+            }; 
+
+            utils.safeCallback(callback, true, utils.exportDocuments(documents));
+
+        })
+
+        process._tickCallback();
+
+    } else {
+
+        console.log(`${dbname} database not found in config.`)
+
+        return false;
+
+    }
+
+}
+
+const aggregatefunawait = async(dbname, params) => {
+
+    if (!CheckCorrectDatabase(dbname)) {
+
+        if (!checkDatabaseReady(dbname)) return;
+
+        if (!checkParams(params)) return console.log(`[MongoDB][ERROR] exports.count: Invalid params object.`);
+
+        let collection = getParamsCollection(dbname, params);
+
+        if (!collection) return console.log(`[MongoDB][ERROR] exports.insert: Invalid collection "${params.collection}"`);
+
+        const query = utils.safeObjectArgument(params.query);
+
+        return validateDocuments (await collection.aggregate([query]).toArray())
+
+    } else {
+
+        console.log(`${dbname} database not found in config.`)
+
+        return false;
+
+    }
+
+}
+
 const validateDocuments = (data) => {
 
     if (!Array.isArray(data)) return data;
@@ -1140,5 +1210,8 @@ MongoDB.Async.FindAndInsert = findandinsertawait
 //find data if found then update else insert
 MongoDB.FindInsertUpdate = findinsertupdate     // Required(dbname, parms:{collection,   query{data:"data"},    document{data:"data"},  update{data:"data"}})
 MongoDB.Async.FindInsertUpdate = findinsertupdateawait
+
+MongoDB.Aggregate = aggregatefun
+MongoDB.Async.Aggregate = aggregatefunawait
 
 exports('Load', () => MongoDB);
