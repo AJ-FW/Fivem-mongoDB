@@ -478,7 +478,7 @@ const countfunawait = async(dbname, params)=>  {
 
         const options = utils.safeObjectArgument(params.options);
 
-        return await collection.countDocuments(query, options);
+        return validateDocuments (await collection.countDocuments(query, options));
 
     } else {
 
@@ -715,7 +715,7 @@ const findandupdatefunawait = async(dbname, params, isUpdateOne) => {
 
             if (isUpdateOne) {
 
-                return validateDocuments (await collection.updateOne({_id:afterData}, update, options))
+                return validateDocuments (await collection.updateOne(query, update, options))
                 
             } else {
     
@@ -882,7 +882,7 @@ const findandinsertawait = async (dbname, params) => {
 
         if (!afterData) {
 
-            return await collection.insertMany(documents, options);
+            return validateDocuments ( await collection.insertMany(documents, options));
 
         } else {
             
@@ -1043,7 +1043,7 @@ const findinsertupdateawait = async(dbname, params) => {
 
         if (afterData) {
 
-            return validateDocuments (await collection.updateOne({_id:afterData}, update, options))
+            return validateDocuments (await collection.updateOne(query, update, options))
 
         } else {
             
@@ -1063,7 +1063,7 @@ const findinsertupdateawait = async(dbname, params) => {
     
                 return console.log(`[MongoDB][ERROR] exports.insert: Invalid 'params.documents' value. Expected object or array of objects.`);
 
-            return await  collection.insertMany(documents, options);
+            return validateDocuments (await  collection.insertMany(documents, options));
         }
 
     } else {
