@@ -1,9 +1,14 @@
 {
-    "name": "mongodb-wrapper",
-    "version": "1.0.1",
-    "main": "cluster.js",
-    "license": "MIT",
-    "dependencies": {
-        "mongodb": "^3.6.3"
-    }
+  "name": "mongodb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "author": "9dgamer",
+  "license": "MIT",
+  "dependencies": {
+    "mongodb": "^4.8.0"
+  }
 }
