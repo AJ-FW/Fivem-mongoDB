@@ -1,1 +1,0 @@
-MongoDB = exports.cluster:Load()
