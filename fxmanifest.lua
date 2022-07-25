@@ -8,6 +8,6 @@ version '1.0.4'
 server_only 'yes'
 
 server_scripts{
-    "cluster.js",
-    "init.lua",
+    "src/main.js",
+    "lib/init.lua",
 }
