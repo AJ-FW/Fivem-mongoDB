@@ -1,6 +1,6 @@
 # mongoDB
 
-## This resource is created by 9dgamer#4348
+## This resource is created by Addictive Playz#4348
 
 
-for help contact here https://discord.gg/hFrfhxJAkj
+for help contact here Addictive Playz#4348
